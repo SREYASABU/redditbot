@@ -2,3 +2,4 @@ google-generativeai
 praw
 python-dotenv
 configparser
+sqlalchemy
