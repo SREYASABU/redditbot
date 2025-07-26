@@ -154,9 +154,10 @@ def run_bot_cycle(session):
         print(f"Checking r/{subreddit_name} for new posts...")
         try:
             subreddit = reddit.subreddit(subreddit_name)
+            posts=subreddit.new(limit=5)
             for post in subreddit.new(limit=5):
-                process_post(post, subreddit_name, session)
-                time.sleep(random.randint(180, 300))  # 3-5 min delay between replies
+                if process_post(post, subreddit_name, session):
+                    time.sleep(random.randint(180, 300))  # 3-5 min delay between replies
         except Exception as e:
             print(f"Subreddit error: {e}")
             log_error(f"Subreddit {subreddit_name} error: {e}", session)
