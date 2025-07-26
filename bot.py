@@ -62,7 +62,6 @@ except Exception as e:
 try:
     genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
     model = genai.GenerativeModel('gemini-1.5-flash')
-    print("Gemini initialized successfully")
 except Exception as e:
     print(f"Gemini initialization failed: {e}")
     exit(1)
@@ -139,7 +138,7 @@ def process_post(post, subreddit_name, session):
         if not response:
             return False
         try:
-            print(f"Reply: {response}")
+            print("replied to the post with : {}".format(response))
             log_interaction(post, response, keywords, subreddit_name, session)
             return True
         except Exception as e:
@@ -152,7 +151,6 @@ def process_post(post, subreddit_name, session):
         return False
 
 def run_bot_cycle(session):
-    print(f"\n{datetime.now().isoformat()} - Starting bot cycle...")
     for subreddit_name in SUBREDDITS:
         print(f"Checking r/{subreddit_name} for new posts...")
         try:
@@ -188,7 +186,6 @@ def run_bot():
         print("Database connection closed")
 
 if __name__ == "__main__":
-    print("Starting Reddit bot with Gemini...")
     print(f"Tracking keywords: {', '.join(KEYWORDS)}")
     print(f"Monitoring subreddits: {', '.join(SUBREDDITS)}")
     run_bot()
