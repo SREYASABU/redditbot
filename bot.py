@@ -83,6 +83,7 @@ def generate_response(prompt):
         response = model.generate_content(
             f"You're a helpful Reddit assistant. Reply concisely to this post (1-2 sentences max). "
             f"Use tricks like small typos to make it look more humanlike\n\n"
+            f"make sure the tone of the reply matches the tone of the post\n\n"
             f"Post: {prompt}",
             generation_config={
                 "max_output_tokens": MAX_RESPONSE_LENGTH,
