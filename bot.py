@@ -39,7 +39,6 @@ Session = sessionmaker(bind=engine)
 try:
     KEYWORDS = [kw.strip().lower() for kw in config['REDDIT']['keywords'].split(',') if kw.strip()]
     SUBREDDITS = [sr.strip() for sr in config['REDDIT']['subreddits'].split(',') if sr.strip()]
-    DELAY_BETWEEN_REPLIES = max(60, int(config['REDDIT'].get('delay_between_replies', '3600')))
     MAX_RESPONSE_LENGTH = min(200, max(50, int(config['BOT'].get('max_response_length', '150'))))
     TEMPERATURE = min(1.0, max(0.1, float(config['BOT'].get('temperature', '0.7'))))
     MAX_POST_AGE_HOURS = int(config['REDDIT'].get('max_post_age_hours', '4'))
@@ -157,6 +156,7 @@ def run_bot_cycle(session):
             subreddit = reddit.subreddit(subreddit_name)
             for post in subreddit.new(limit=5):
                 process_post(post, subreddit_name, session)
+                time.sleep(random.randint(180, 300))  # 3-5 min delay between replies
         except Exception as e:
             print(f"Subreddit error: {e}")
             log_error(f"Subreddit {subreddit_name} error: {e}", session)
