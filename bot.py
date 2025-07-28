@@ -137,6 +137,7 @@ def process_post(post, subreddit_name, session):
         if not response:
             return False
         try:
+            post.reply(response)
             print("replied to the post with : {}".format(response))
             log_interaction(post, response, keywords, subreddit_name, session)
             return True
@@ -154,7 +155,6 @@ def run_bot_cycle(session):
         print(f"Checking r/{subreddit_name} for new posts...")
         try:
             subreddit = reddit.subreddit(subreddit_name)
-            posts=subreddit.new(limit=5)
             for post in subreddit.new(limit=5):
                 if process_post(post, subreddit_name, session):
                     time.sleep(random.randint(180, 300))  # 3-5 min delay between replies
