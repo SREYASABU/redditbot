@@ -51,6 +51,3 @@ A Reddit bot that uses Google's Gemini AI to generate human-like responses to po
 - The bot includes rate limiting to comply with Reddit's API rules
 - Monitor the bot's activity, especially when first deploying
 - Be respectful of subreddit rules and Reddit's terms of service
-
-## 🤝 Contributing
-Feel free to submit issues and enhancement requests. Pull requests are welcome!
